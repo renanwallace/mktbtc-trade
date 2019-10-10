@@ -6,7 +6,7 @@ export interface Route {
   action: Handler;
   method: string;
   path: PathParams;
-  middleware: RequestHandler | undefined;
+  middleware: RequestHandler[];
 };
 
 const routes: Route[] = [
@@ -14,7 +14,7 @@ const routes: Route[] = [
     action: home,
     method: 'get',
     path: '/',
-    middleware: undefined
+    middleware: []
   }
 ];
 
