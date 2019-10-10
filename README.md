@@ -2,5 +2,5 @@
 
 Robot to auto sell and buy orders;
 
-[ ] Consult coin
-[ ] Buy Coin
+- [ ] Consult coin
+- [ ] Buy Coin
