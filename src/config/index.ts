@@ -32,8 +32,8 @@ const config = {
   PORT: envVars.PORT,
   BASE_URL: envVars.BASE_URL,
   LOG_TYPE: getLogType(),
-  API_URL: envVars.BASE_URL + 'API/',
-  TAPI_URL: envVars.BASE_URL + 'TAPI/'
+  API_PATH: envVars.BASE_URL + 'api/',
+  TAPI_PATH: envVars.BASE_URL + 'tap/'
 };
 
 export default config;
