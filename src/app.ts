@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -9,11 +9,21 @@ import pkg from '../package.json';
 const app: Application = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));
-app.use(logger('dev'));
+app.use(logger(config.LOG_TYPE));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(router);
+
+async function ignoreFavicon(req: Request, res: Response, next: NextFunction) {
+  if (req.originalUrl === '/favicon.ico') {
+    res.status(204).json({ nope: true });
+  } else {
+    next();
+  }
+};
+
+app.use(ignoreFavicon);
 
 debug(`${pkg.name}:${pkg.main}`);
 

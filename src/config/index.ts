@@ -8,7 +8,8 @@ dotenv.config();
 const envVarsSchema: JoiObject = Joi.object({
   NODE_ENV: Joi.string()
     .allow(['development', 'production', 'test'])
-    .default('production'),
+    .default('production')
+    .required(),
   PORT: Joi.number().required().default(8000).description('Porta usada pela API'),
   BASE_URL: Joi.string().required()
 }).unknown().required();
@@ -17,10 +18,20 @@ const { error, value: envVars }: { error: ValidationError, value: any } = Joi.va
 
 if (error) throw new Error(`Erro de validação no .env: ${error.message}`);
 
+function getLogType() {
+  switch (envVars.NODE_ENV) {
+    case 'development':
+      return 'dev'
+    default:
+      return 'tiny'
+  }
+}
+
 const config = {
   NODE_ENV: envVars.NODE_ENV,
   PORT: envVars.PORT,
-  BASE_URL: envVars.BASE_URL
+  BASE_URL: envVars.BASE_URL,
+  LOG_TYPE: getLogType()
 };
 
 export default config;
