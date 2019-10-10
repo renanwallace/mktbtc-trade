@@ -6,11 +6,9 @@ const dataApi: any = marketBitcoin.dataApi;
 
 async function coinInfo(req: Request, res: Response) {
   const data = dataApi(req.params.coin, req.params.method);
-  const response = await data.BTC.ticker()
-    .then((res: AxiosResponse) => res.data)
-    .catch((erro: AxiosError) => console.log('Deu erro!', erro.message))
-
-  res.send(response);
-}
+  data.BTC.ticker()
+    .then((response: AxiosResponse) => res.send(response.data))
+    .catch((erro: AxiosError) => res.send({ error: erro.message }));
+};
 
 export default coinInfo;
