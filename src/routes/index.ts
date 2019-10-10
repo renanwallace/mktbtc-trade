@@ -1,10 +1,12 @@
 import home from './home';
+import { Handler, RequestHandler } from 'express';
+import { PathParams } from 'express-serve-static-core';
 
 export interface Route {
-  action: Function;
+  action: Handler;
   method: string;
-  path: string,
-  middleware: any
+  path: PathParams;
+  middleware: RequestHandler | undefined;
 };
 
 const routes: Route[] = [
