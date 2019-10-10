@@ -20,5 +20,5 @@ npm start
 ```
 
 
-- [ ] Consult coin
+- [x] Consult coin
 - [ ] Buy Coin
