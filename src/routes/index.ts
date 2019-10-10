@@ -1,4 +1,7 @@
 import home from './home';
+import coinInfo from './coinInfo';
+import { validateInfoRoute } from '../middleware'
+
 import { Handler, RequestHandler } from 'express';
 import { PathParams } from 'express-serve-static-core';
 
@@ -15,6 +18,12 @@ const routes: Route[] = [
     method: 'get',
     path: '/',
     middleware: []
+  },
+  {
+    action: coinInfo,
+    method: 'get',
+    path: '/info/:coin/:method',
+    middleware: [validateInfoRoute]
   }
 ];
 
