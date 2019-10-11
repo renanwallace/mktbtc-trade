@@ -4,7 +4,7 @@ import config from '../../config';
 
 const requestConfig: AxiosRequestConfig = {
   baseURL: config.BASE_URL,
-  timeout: 1000,
+  timeout: 2200,
 };
 
 const connection: AxiosInstance = createInstance(requestConfig);
@@ -17,6 +17,6 @@ const dataApi = (coin: string, method: string) => {
       trades: () => connection.get(`${config.API_PATH + coin}/${method}/`),
     }
   }
-}
+};
 
 export default dataApi;
