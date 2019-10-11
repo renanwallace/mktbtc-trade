@@ -6,6 +6,7 @@ import debug from 'debug';
 import router from './router';
 import config from './config';
 import pkg from '../package.json';
+import { invalidRequest } from './middleware'
 const app: Application = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(router);
+app.use(invalidRequest);
 
 async function ignoreFavicon(req: Request, res: Response, next: NextFunction) {
   if (req.originalUrl === '/favicon.ico') {

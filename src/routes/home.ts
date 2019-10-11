@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-function Home(req: Request, res: Response) {
-  res.send('OK');
+async function Home(req: Request, res: Response) {
+  res.status(200).send({ message: 'server is running' });
 };
 
 export default Home;
