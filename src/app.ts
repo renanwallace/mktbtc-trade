@@ -6,7 +6,7 @@ import debug from 'debug';
 import router from './router';
 import config from './config';
 import pkg from '../package.json';
-import { invalidRequest } from './middleware'
+import { invalidRequest, validateToken } from './middleware'
 const app: Application = express();
 
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -14,6 +14,7 @@ app.use(logger(config.LOG_TYPE));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(validateToken);
 app.use(router);
 app.use(invalidRequest);
 

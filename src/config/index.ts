@@ -6,6 +6,7 @@ dotenv.config();
 
 // valida nossas variaveis
 const envVarsSchema: JoiObject = Joi.object({
+  SECURE_TOKEN: Joi.string().required(),
   NODE_ENV: Joi.string()
     .allow(['development', 'production', 'test'])
     .default('production')
@@ -32,6 +33,7 @@ function getLogType() {
 }
 
 const config = {
+  SECURE_TOKEN: envVars.SECURE_TOKEN,
   NODE_ENV: envVars.NODE_ENV,
   PORT: envVars.PORT,
   BASE_URL: envVars.BASE_URL,
