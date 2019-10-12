@@ -1,5 +1,6 @@
 import home from './home';
 import coinInfo from './coinInfo';
+import trade from './trade'
 import { validateInfoRoute } from '../middleware'
 
 import { Handler, RequestHandler } from 'express';
@@ -24,6 +25,12 @@ const routes: Route[] = [
     method: 'get',
     path: '/info/:coin/:method',
     middleware: [validateInfoRoute]
+  },
+  {
+    action: trade,
+    method: 'get',
+    path: '/trade/orders/:coinPair',
+    middleware: []
   }
 ];
 

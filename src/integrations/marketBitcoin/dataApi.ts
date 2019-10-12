@@ -9,7 +9,7 @@ const requestConfig: AxiosRequestConfig = {
 
 const connection: AxiosInstance = createInstance(requestConfig);
 
-const dataApi = (coin: string, method: string) => {
+export default function dataApi(coin: string, method: string) {
   return {
     BTC: {
       ticker: () => connection.get(`${config.API_PATH + coin}/${method}/`),
@@ -18,5 +18,3 @@ const dataApi = (coin: string, method: string) => {
     }
   }
 };
-
-export default dataApi;
