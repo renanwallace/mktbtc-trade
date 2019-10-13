@@ -5,8 +5,8 @@ const router: any = express.Router();
 
 const createRoutes = (routes: Route[]) =>
   routes.map(route => (route.middleware.length)
-    ? router[route.method](route.path, ...route.middleware, route.action)
-    : router[route.method](route.path, route.action)
+    ? router[route.method.toLowerCase()](route.path, ...route.middleware, route.action)
+    : router[route.method.toLowerCase()](route.path, route.action)
   );
 
 createRoutes(routes);

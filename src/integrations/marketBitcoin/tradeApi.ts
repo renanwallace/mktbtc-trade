@@ -1,6 +1,6 @@
 import { createInstance } from '../../connection';
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
-import crypto from 'crypto';
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import createSignature from '../../helpers/creteSignature';
 import * as qs from 'querystring';
 import config from '../../config';
 import { now } from '../../helpers/date';
@@ -10,13 +10,9 @@ const requestConfig: AxiosRequestConfig = {
 };
 const connection: AxiosInstance = createInstance(requestConfig);
 
-
-const listOrders = async (coin_pair: string) => {
-  const queryString = qs.stringify({ tapi_method: 'list_orders', tapi_nonce: now(), coin_pair });
-  const signature = crypto
-    .createHmac("sha512", config.SECRET)
-    .update(config.TAPI_PATH + "?" + queryString)
-    .digest("hex");
+const makeRequest = async (data: object) => {
+  const queryString = qs.stringify({ ...data, tapi_nonce: now() });
+  const signature = createSignature(queryString);
 
   return connection.request({
     url: config.TAPI_PATH,
@@ -27,8 +23,29 @@ const listOrders = async (coin_pair: string) => {
     },
     data: queryString
   });
-}
+};
+
+const listOrders = async (coin_pair: string = 'BRLBTC'): Promise<AxiosResponse> => {
+  return makeRequest({ tapi_method: 'list_orders', coin_pair });
+};
+
+const accountInfo = async () => {
+  return makeRequest({ tapi_method: 'get_account_info' });
+};
+
+const getOrder = async (order_id: number, coin_pair: string = 'BRLBTC') => {
+  return makeRequest({ tapi_method: 'get_order', order_id, coin_pair });
+};
+
+const listOrderBook = async (full: boolean = false, coin_pair: string = 'BRLBTC') => {
+  return makeRequest({ tapi_method: 'list_orderbook', coin_pair, full });
+};
+
+const buyOrder = async (quantity: string, limitPrice: string, coin_pair: string = 'BRLBTC') => {
+  return makeRequest({ tapi_method: 'place_buy_order', coin_pair, quantity, limitPrice });
+};
+
 
 export default function tradeApi() {
-  return { listOrders }
+  return { listOrders, accountInfo, getOrder, listOrderBook, buyOrder }
 };
