@@ -11,10 +11,8 @@ const connection: AxiosInstance = createInstance(requestConfig);
 
 export default function dataApi(coin: string, method: string) {
   return {
-    BTC: {
-      ticker: () => connection.get(`${config.API_PATH + coin}/${method}/`),
-      orderbook: () => connection.get(`${config.API_PATH + coin}/${method}/`),
-      trades: () => connection.get(`${config.API_PATH + coin}/${method}/`),
-    }
+    ticker: () => connection.get(`${config.API_PATH + coin}/${method}/`),
+    orderbook: () => connection.get(`${config.API_PATH + coin}/${method}/`),
+    trades: () => connection.get(`${config.API_PATH + coin}/${method}/`),
   }
 };
