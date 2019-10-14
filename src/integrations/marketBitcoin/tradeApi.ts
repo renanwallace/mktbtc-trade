@@ -25,27 +25,57 @@ const makeRequest = async (data: object) => {
   });
 };
 
-const listOrders = async (coin_pair: string = 'BRLBTC'): Promise<AxiosResponse> => {
-  return makeRequest({ tapi_method: 'list_orders', coin_pair });
-};
+const listOrders = async (
+  coin_pair: string = 'BRLBTC'
+): Promise<AxiosResponse> => makeRequest({
+  tapi_method: 'list_orders',
+  coin_pair
+});
 
-const accountInfo = async () => {
-  return makeRequest({ tapi_method: 'get_account_info' });
-};
+const accountInfo = async ():
+  Promise<AxiosResponse> => makeRequest({
+    tapi_method: 'get_account_info'
+  });
 
-const getOrder = async (order_id: number, coin_pair: string = 'BRLBTC') => {
-  return makeRequest({ tapi_method: 'get_order', order_id, coin_pair });
-};
 
-const listOrderBook = async (full: boolean = false, coin_pair: string = 'BRLBTC') => {
-  return makeRequest({ tapi_method: 'list_orderbook', coin_pair, full });
-};
+const getOrder = async (
+  order_id: number,
+  coin_pair: string = 'BRLBTC'
+): Promise<AxiosResponse> => makeRequest({
+  tapi_method: 'get_order',
+  order_id, coin_pair
+});
 
-const buyOrder = async (quantity: string, limitPrice: string, coin_pair: string = 'BRLBTC') => {
-  return makeRequest({ tapi_method: 'place_buy_order', coin_pair, quantity, limitPrice });
-};
+
+const listOrderBook = async (
+  full: boolean = false,
+  coin_pair: string = 'BRLBTC'
+): Promise<AxiosResponse> => makeRequest({
+  tapi_method: 'list_orderbook',
+  coin_pair,
+  full
+});
+
+
+const buyOrder = async (
+  quantity: string,
+  limitPrice: string,
+  coin_pair: string = 'BRLBTC'
+): Promise<AxiosResponse> => makeRequest({
+  tapi_method: 'place_buy_order',
+  coin_pair,
+  quantity,
+  limitPrice
+});
+
 
 
 export default function tradeApi() {
-  return { listOrders, accountInfo, getOrder, listOrderBook, buyOrder }
+  return {
+    listOrders,
+    accountInfo,
+    getOrder,
+    listOrderBook,
+    buyOrder
+  }
 };
