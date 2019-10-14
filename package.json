@@ -9,7 +9,8 @@
     "clean": "rm -rf dist",
     "clean:all": "rm -rf dist node_modules",
     "start": "tsc && node ./dist/src/app.js",
-    "dev": "nodemon ./dist/src/app.js"
+    "dev": "nodemon ./dist/src/app.js",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "author": "",
   "license": "ISC",
