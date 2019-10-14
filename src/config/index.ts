@@ -1,5 +1,5 @@
-import Joi, { JoiObject, ValidationError } from 'joi';
-import dotenv from 'dotenv';
+import Joi, { JoiObject, ValidationError } from "joi";
+import dotenv from "dotenv";
 
 // le variaveis do .env e preenche no process.env
 dotenv.config();
@@ -8,27 +8,29 @@ dotenv.config();
 const envVarsSchema: JoiObject = Joi.object({
   SECURE_TOKEN: Joi.string().required(),
   NODE_ENV: Joi.string()
-    .allow(['development', 'production', 'test'])
-    .default('production')
+    .allow(["development", "production", "test"])
+    .default("production")
     .required(),
-  PORT: Joi.number().required().default(8000).description('Porta usada pela API'),
-  BASE_URL: Joi.string().required().description('Url base do mercado bitcoin'),
-  KEY: Joi.string().length(32).required().description('Key da API mercado bitcoin'),
-  SECRET: Joi.string().required().description('SECRET da API mercado bitcoin'),
-  API_PATH: Joi.string().required().description('PATH API mercado bitcoin'),
-  TAPI_PATH: Joi.string().required().description('PATH TAPI mercado bitcoin')
+  PORT: Joi.number().required().default(8000).description("Porta usada pela API"),
+  BASE_URL: Joi.string().required().description("Url base do mercado bitcoin"),
+  KEY: Joi.string().length(32).required().description("Key da API mercado bitcoin"),
+  SECRET: Joi.string().required().description("SECRET da API mercado bitcoin"),
+  API_PATH: Joi.string().required().description("PATH API mercado bitcoin"),
+  TAPI_PATH: Joi.string().required().description("PATH TAPI mercado bitcoin")
 }).unknown().required();
 
 const { error, value: envVars }: { error: ValidationError, value: any } = Joi.validate(process.env, envVarsSchema);
 
-if (error) throw new Error(`Erro de validação no .env: ${error.message}`);
+if (error) {
+  throw new Error(`Erro de validação no .env: ${error.message}`);
+}
 
 function getLogType() {
   switch (envVars.NODE_ENV) {
-    case 'development':
-      return 'dev'
+    case "development":
+      return "dev";
     default:
-      return 'tiny'
+      return "tiny";
   }
 }
 

@@ -1,10 +1,10 @@
-import express from 'express';
-import { Route } from '../routes';
-import routes from '../routes';
+import express from "express";
+import { Route } from "../routes";
+import routes from "../routes";
 const router: any = express.Router();
 
 const createRoutes = (routes: Route[]) =>
-  routes.map(route => (route.middleware.length)
+  routes.map((route: Route) => (route.middleware)
     ? router[route.method.toLowerCase()](route.path, route.middleware, route.action)
     : router[route.method.toLowerCase()](route.path, route.action)
   );

@@ -1,5 +1,5 @@
 export default [
-  'ticker',
-  'orderbook',
-  'trades'
-]
+  "ticker",
+  "orderbook",
+  "trades"
+];

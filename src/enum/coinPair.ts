@@ -1,11 +1,11 @@
 export const validsCoinPair = [
-  'BRLBTC'
-]
+  "BRLBTC"
+];
 
 export default {
-  'BRLBTC': 'Real e Bitcoin',
-  'BRLBCH': 'Real e BCash',
-  'BRLETH': 'Real e Ethereum',
-  'BRLLTC': 'Real e Litecoin',
-  'BRLXRP': 'Real e Litecoin'
+  BRLBTC: "Real e Bitcoin",
+  BRLBCH: "Real e BCash",
+  BRLETH: "Real e Ethereum",
+  BRLLTC: "Real e Litecoin",
+  BRLXRP: "Real e Litecoin"
 };
