@@ -20,7 +20,8 @@
     "noEmitOnError": true,
     "resolveJsonModule": true,
     "removeComments": true,
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true
   },
   "include": [
     "src/**/*"
