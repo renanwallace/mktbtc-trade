@@ -6,7 +6,6 @@ import getOrder from './getOrder';
 import listOrderBook from './listOrderBook';
 import buyOrder from './buyOrder';
 import { validateInfoRoute, validatePairCoin, validateBuySellOrder } from '../middleware'
-
 import { Handler, RequestHandler } from 'express';
 import { PathParams } from 'express-serve-static-core';
 
