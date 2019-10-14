@@ -1,4 +1,4 @@
-import { createInstance } from "../../connection";
+import createInstance from "../../connection";
 import { AxiosInstance, AxiosRequestConfig, AxiosPromise } from "axios";
 import config from "../../config";
 

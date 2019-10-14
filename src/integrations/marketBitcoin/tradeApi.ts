@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
 import * as qs from "querystring";
 import config from "../../config";
-import { createInstance } from "../../connection";
+import createInstance from "../../connection";
 import createSignature from "../../helpers/creteSignature";
 import { now } from "../../helpers/date";
 
@@ -15,7 +15,7 @@ export interface TradeAction {
   buyOrder: (quantity: string, limitPrice: string, coinPair?: string) => AxiosPromise;
   getOrder: (orderId: number, coinPair?: string) => AxiosPromise;
   listOrderBook: (full: boolean, coinPair?: string) => AxiosPromise;
-  listOrders: () => AxiosPromise;
+  listOrders: (coinPair: string) => AxiosPromise;
 }
 
 const makeRequest = async (data: object) => {
