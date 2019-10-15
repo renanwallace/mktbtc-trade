@@ -1,6 +1,11 @@
 import { Handler, RequestHandler } from "express";
 import { PathParams } from "express-serve-static-core";
-import { validateBuyOrder, validateInfoRoute, validateSellOrder, validatePairCoin } from "../middleware";
+import {
+  validateBuyOrder,
+  validateInfoRoute,
+  validateSellOrder,
+  validatePairCoin
+} from "../middleware";
 import accountInfo from "./accountInfo";
 import buyOrder from "./buyOrder";
 import coinInfo from "./coinInfo";
