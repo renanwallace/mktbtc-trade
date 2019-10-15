@@ -16,9 +16,10 @@ export interface TradeAction {
   getOrder: (orderId: number, coinPair?: string) => AxiosPromise;
   listOrderBook: (full: boolean, coinPair?: string) => AxiosPromise;
   listOrders: (coinPair: string) => AxiosPromise;
+  sellOrder: (quantity: string, limitPrice: string, coinPair?: string) => AxiosPromise;
 }
 
-const makeRequest = async (data: object) => {
+const sendRequest = async (data: object) => {
   const queryString = qs.stringify({ ...data, tapi_nonce: now() });
   const signature = createSignature(queryString);
 
@@ -34,35 +35,43 @@ const makeRequest = async (data: object) => {
 };
 
 const listOrders = async (coinPair = "BRLBTC") =>
-  makeRequest({
+  sendRequest({
     coin_pair: coinPair,
     tapi_method: "list_orders"
   });
 
-const accountInfo = async () => makeRequest({
+const accountInfo = async () => sendRequest({
   tapi_method: "get_account_info"
 });
 
 const getOrder = async (orderId: number, coinPair = "BRLBTC") =>
-  makeRequest({
+  sendRequest({
     coin_pair: coinPair,
     order_id: orderId,
     tapi_method: "get_order"
   });
 
 const listOrderBook = async (full = false, coinPair = "BRLBTC") =>
-  makeRequest({
+  sendRequest({
     coin_pair: coinPair,
     full,
     tapi_method: "list_orderbook"
   });
 
 const buyOrder = async (quantity: string, limitPrice: string, coinPair = "BRLBTC") =>
-  makeRequest({
+  sendRequest({
     coin_pair: coinPair,
     limitPrice,
     quantity,
     tapi_method: "place_buy_order"
+  });
+
+const sellOrder = async (quantity: string, limitPrice: string, coinPair = "BRLBTC") =>
+  sendRequest({
+    coin_pair: coinPair,
+    limitPrice,
+    quantity,
+    tapi_method: "place_sell_order"
   });
 
 export default function tradeApi(): TradeAction {
@@ -71,6 +80,7 @@ export default function tradeApi(): TradeAction {
     buyOrder,
     getOrder,
     listOrderBook,
-    listOrders
+    listOrders,
+    sellOrder,
   };
 }

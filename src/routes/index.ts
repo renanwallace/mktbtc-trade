@@ -1,6 +1,6 @@
 import { Handler, RequestHandler } from "express";
 import { PathParams } from "express-serve-static-core";
-import { validateBuySellOrder, validateInfoRoute, validatePairCoin } from "../middleware";
+import { validateBuyOrder, validateInfoRoute, validateSellOrder, validatePairCoin } from "../middleware";
 import accountInfo from "./accountInfo";
 import buyOrder from "./buyOrder";
 import coinInfo from "./coinInfo";
@@ -8,6 +8,7 @@ import getOrder from "./getOrder";
 import home from "./home";
 import listOrderBook from "./listOrderBook";
 import listOrders from "./listOrders";
+import sellOrder from "./sellOrder";
 
 export interface Route {
   action: Handler;
@@ -56,7 +57,13 @@ const routes: Route[] = [
     action: buyOrder,
     method: "post",
     path: "/trade/place/buy",
-    middleware: [validateBuySellOrder]
+    middleware: [validateBuyOrder]
+  },
+  {
+    action: sellOrder,
+    method: "post",
+    path: "/trade/place/sell",
+    middleware: [validateSellOrder]
   }
 ];
 

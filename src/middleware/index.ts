@@ -52,8 +52,20 @@ export async function validatePairCoin(req: Request, res: Response, next: NextFu
   }
 }
 
-export async function validateBuySellOrder(req: Request, res: Response, next: NextFunction) {
-  if (parseFloat(req.body.quantity) >= 0.001 && parseFloat(req.body.limitPrice) >= 0.20) {
+export async function validateBuyOrder(req: Request, res: Response, next: NextFunction) {
+  if (parseFloat(req.body.quantity) >= 0.001 && parseFloat(req.body.limitPrice) >= 0.20) { // Aplicar lógica correta
+    next();
+  } else {
+    console.log("Parâmetros invalidos para a rota:", req.body);
+    res.status(400)
+      .json(createObjectError({
+        message: "Necessário informar quantidade e valor limite acima do seguro", code: 400
+      }));
+  }
+}
+
+export async function validateSellOrder(req: Request, res: Response, next: NextFunction) {
+  if (parseFloat(req.body.quantity) >= 0.001 && parseFloat(req.body.limitPrice) >= 0.20) { // Aplicar lógica correta
     next();
   } else {
     console.log("Parâmetros invalidos para a rota:", req.body);
