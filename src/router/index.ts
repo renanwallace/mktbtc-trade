@@ -1,12 +1,14 @@
-import express from "express";
+import express, { Router } from "express";
 import { Route } from "../routes";
 import routes from "../routes";
-const router: any = express.Router();
+const router: Router = express.Router();
 
 const createRoutes = (routes: Route[]) =>
-  routes.map((route: Route) => (route.middleware)
-    ? router[route.method.toLowerCase()](route.path, route.middleware, route.action)
-    : router[route.method.toLowerCase()](route.path, route.action)
+  routes.map((route: Route) => {
+    (route.middleware)
+      ? (router as Router | any)[route.method.toLowerCase()](route.path, route.middleware, route.action)
+      : (router as Router | any)[route.method.toLowerCase()](route.path, route.action);
+  }
   );
 
 createRoutes(routes);
